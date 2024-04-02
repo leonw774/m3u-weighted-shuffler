@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}   
+
+h1 {
+    color: #333;
+}
+
+#instructions {
+    margin-top: 10px;
+    text-align: left;
+}
+
+button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#methodSelectionContainer,
+#methodDescription {
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 10px;
+    border: #333 1px solid;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+}
+
+#showLists {
+    display: flex;
+}
+
+#uploadedListContainer,
+#shuffledListContainer {
+    margin: 10px auto;
+    padding: 10px;
+    border: #333 1px solid;
+    width: 45%;
+}
+
+#uploadedList, #shuffledList {
+    margin-top: 10px;
+    text-align: left;
+    white-space: nowrap;
+    max-height: 900px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}

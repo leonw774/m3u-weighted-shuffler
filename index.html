@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3U Playlist Weighted Shuffle</title>
+<link rel="stylesheet" href="styles.css">
+<script src="javascript-playlist-parser/parser.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>M3U Playlist Weighted Shuffle</h1>
+    <input type="file" id="fileInput" accept=".m3u">
+
+    <div id="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+        <li>Click the "Upload" button to select a m3u file from your device.</li>
+        <li>Select the weighting method and enter a decay rate.</li>
+        <li>Click the "Shuffle list" button to shuffle the list.</li>
+        <li>Finally, click the "Download" button to save the shuffled playlist.</li>
+        </ol>
+    </div>
+
+    <div id="methodSelectionContainer">
+        <input type="radio" name="weightMethod" value="linear" checked> Linear Decay
+        <input type="radio" name="weightMethod" value="exponent"> Exponent Decay <br />
+        Input value of decayRate: <input type="text" id="decayRate" name="decayRate" value="0.9"> 
+    </div>
+
+    <div id="methodDescription">
+        <div id="linearDecayDesc">
+        Linear Decay: W(i) = 1 - decayRate * i / L
+        </div>
+        <div id="exponentDecayDesc">
+        Exponent Decay: W(i) = e ^ ( π * -decayRate * i / L )
+        </div>
+        <ul>
+            <li>"i" is the index in sorted list</li>
+            <li>"L" is the length of the list</li>
+            <li>"decayRate" should be in range [0, 1]</li>
+            <li>Higher "decayRate", lower weights for the tail items</li>
+        </ul>
+    </div>
+
+    <div id="showLists">
+        <div id="uploadedListContainer">
+            <b>Sorted List</b>
+            <div id="uploadedList">
+                No item
+            </div>
+        </div>
+        <div id="uploadedListContainer">
+        <b>Shuffled List</b>
+        <div id="shuffledList">
+            No item
+        </div>
+        </div>
+    </div>
+
+    <button id="shuffleBtn">Shuffle list</button>
+    <a id="downloadLink" download="shuffled_list.m3u">
+        <button id="downloadBtn">Download</button>
+    </a>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
