@@ -33,15 +33,15 @@ button:hover {
     background-color: #0056b3;
 }
 
-#methodSelectionContainer,
-#decayDescription {
+#formulaSelectionContainer,
+#formulaDescription {
     max-width: 600px;
     margin: 10px auto;
     padding: 10px;
     border: #333 1px solid;
     text-align: left;
 }
-#decayDescription {
+#formulaDescription {
     font-family: monospace;
 }
 
