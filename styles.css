@@ -55,6 +55,7 @@ button:hover {
 #uploadedList, #shuffledList {
     margin-top: 10px;
     text-align: left;
+    line-height: 1.25em;
     white-space: nowrap;
     max-height: 900px;
     overflow-x: scroll;

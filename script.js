@@ -77,6 +77,10 @@ function shuffleBtnFunc() {
 
     reader.onload = function(event) {
         const playlist = window.M3U.parse(event.target.result);
+        if (playlist.length === 0) {
+            alert('The playlist is empty.');
+            return;
+        }
         // console.log(playlist);
         const weights = []
         for (let i = 0; i < playlist.length; i++) {
