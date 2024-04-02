@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    min-width: 600px;
+    min-width: 300px;
 }
 
 .container {
@@ -34,16 +34,15 @@ button:hover {
 }
 
 #methodSelectionContainer,
-#methodDescription {
+#decayDescription {
     max-width: 600px;
     margin: 10px auto;
     padding: 10px;
     border: #333 1px solid;
     text-align: left;
 }
-#methodDescription {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.8em;
+#decayDescription {
+    font-family: monospace;
 }
 
 #showLists {

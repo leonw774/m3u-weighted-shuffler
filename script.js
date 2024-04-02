@@ -69,9 +69,11 @@ function shuffleBtnFunc() {
     }
 
     const checkedMethod = 
-        document.querySelector('input[name="weightMethod"]:checked').value;
+        document.querySelector('input[name="decayFormula"]:checked').value;
     const weightFunc = (checkedMethod === "linear") ? (
-        (index, length) => length - Math.min(decayRate * index, length - 1)
+        (index, length) => length - decayRate * Math.min(
+            index, Math.floor(length / decayRate)
+        )
     ) : (
         (index, length) => Math.E ** (-2 * Math.PI * decayRate * index / length)
     );
@@ -91,7 +93,7 @@ function shuffleBtnFunc() {
         for (let i = 0; i < playlist.length; i++) {
             weights.push(weightFunc(i, playlist.length));
         }
-        // console.log(weights);
+        console.log(weights);
         
         const shuffledList = weightedShuffle(playlist, weights);
         // console.log(shuffledList);
