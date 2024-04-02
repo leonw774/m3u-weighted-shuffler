@@ -30,6 +30,7 @@ function weightedShuffle(arr, weights) {
     const weightCumSum = weights.map(getCumSum);
     // console.log(weightCumSum);
     const shuffledArr = [];
+    const epsilon = 1e-9;
     for (let i = 0; i < arr.length; i++) {
         const r = Math.random() * weightCumSum[arr.length - 1];
         const j = bisectRight(weightCumSum, r);
@@ -37,6 +38,9 @@ function weightedShuffle(arr, weights) {
         shuffledArr.push(arr[j]);
         for (let k = j; k < arr.length; k++) {
             weightCumSum[k] -= weights[j]
+            if (Math.abs(weightCumSum[k]) < epsilon) {
+                weightCumSum[k] = 0;
+            }
         }
         // console.log(weightCumSum);
     }
@@ -59,18 +63,19 @@ function shuffleBtnFunc() {
         return;
     }
     const decayRate = parseFloat(decayRateStr);
-    if (decayRate < 0 || 1.0 < decayRate) {
-        alert('decayRate should be in range [0, 1)');
+    if (decayRate < 0) {
+        alert('decayRate cannot be less than zero.');
         return;
     }
 
     const checkedMethod = 
         document.querySelector('input[name="weightMethod"]:checked').value;
     const weightFunc = (checkedMethod === "linear") ? (
-        (index, length) => length - decayRate * index
+        (index, length) => length - Math.min(decayRate * index, length - 1)
     ) : (
-        (index, length) => Math.E ** (-Math.PI * decayRate * index / length)
+        (index, length) => Math.E ** (-2 * Math.PI * decayRate * index / length)
     );
+    // console.log(decayRate, checkedMethod);
 
     const file = fileInput.files[0];
     const reader = new FileReader();
@@ -89,6 +94,7 @@ function shuffleBtnFunc() {
         // console.log(weights);
         
         const shuffledList = weightedShuffle(playlist, weights);
+        // console.log(shuffledList);
 
         displayPlaylist(playlist, 'uploadedList');
         displayPlaylist(shuffledList, 'shuffledList');
@@ -107,6 +113,11 @@ function shuffleBtnFunc() {
 
         downloadLink.href = url;
     };
+
+    reader.onerror = function(event) {
+        alert("Cannot open file.");
+        return;
+    }
 
     reader.readAsText(file);
 }

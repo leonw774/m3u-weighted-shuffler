@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M3U Playlist Weighted Shuffle</title>
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:,">
 <script src="javascript-playlist-parser/parser.min.js"></script>
 </head>
 <body>
@@ -15,7 +16,7 @@
     <div id="instructions">
         <h3>Instructions:</h3>
         <ol>
-        <li>Click the "Upload" button to select a m3u file from your device.</li>
+        <li>Select a m3u file from your device.</li>
         <li>Select the weighting method and enter a decay rate.</li>
         <li>Click the "Shuffle list" button to shuffle the list.</li>
         <li>Finally, click the "Download" button to save the shuffled playlist.</li>
@@ -23,23 +24,22 @@
     </div>
 
     <div id="methodSelectionContainer">
-        <input type="radio" name="weightMethod" value="linear" checked> Linear Decay
-        <input type="radio" name="weightMethod" value="exponent"> Exponent Decay <br />
-        Input value of decayRate: <input type="text" id="decayRate" name="decayRate" value="0.9"> 
+        <input type="radio" name="weightMethod" value="linear" checked>
+        Linear Decay &nbsp;
+        <input type="radio" name="weightMethod" value="exponent">
+        Exponential Decay
+        <br />
+        Input value of decayRate:
+        <input type="text" id="decayRate" name="decayRate" value="0.9" size="4"> 
     </div>
 
     <div id="methodDescription">
-        <div id="linearDecayDesc">
-        Linear Decay: W(i) = 1 - decayRate * i / L
-        </div>
-        <div id="exponentDecayDesc">
-        Exponent Decay: W(i) = e ^ ( π * -decayRate * i / L )
-        </div>
+        Linear Decay: W(i) = 1 - min(decayRate * i, L - 1) / L <br />
+        Exponential Decay: W(i) = e ^ ( 2π * -decayRate * i / L )
         <ul>
             <li>"i" is the index in sorted list</li>
             <li>"L" is the length of the list</li>
-            <li>"decayRate" should be in range [0, 1]</li>
-            <li>Higher "decayRate", lower weights for the tail items</li>
+            <li>decayRate >= 0</li>
         </ul>
     </div>
 

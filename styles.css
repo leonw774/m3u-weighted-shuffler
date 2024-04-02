@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    min-width: 600px;
 }
 
 .container {
@@ -13,6 +14,8 @@ h1 {
 }
 
 #instructions {
+    max-width: 600px;
+    margin: 10px auto;
     margin-top: 10px;
     text-align: left;
 }
@@ -36,8 +39,11 @@ button:hover {
     margin: 10px auto;
     padding: 10px;
     border: #333 1px solid;
-    font-family: 'Courier New', Courier, monospace;
     text-align: left;
+}
+#methodDescription {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8em;
 }
 
 #showLists {
@@ -53,11 +59,11 @@ button:hover {
 }
 
 #uploadedList, #shuffledList {
+    max-height: 900px;
     margin-top: 10px;
     text-align: left;
     line-height: 1.25em;
     white-space: nowrap;
-    max-height: 900px;
     overflow-x: scroll;
     overflow-y: scroll;
 }
