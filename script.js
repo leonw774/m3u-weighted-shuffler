@@ -7,8 +7,10 @@ function displayPlaylist(playlist, listid) {
     const listDiv = document.getElementById(listid);
     let displayedText = ''
     for (let i = 0; i < playlist.length; i++) {
-        displayedText += 
-            `${playlist[i].artist}- ${playlist[i].title}\n`;
+        if (playlist[i].artist != '') {
+            displayedText += `${playlist[i].artist} - `;
+        }
+        displayedText += `${playlist[i].title}\n`;
     }
     listDiv.innerText = displayedText;
 }
@@ -72,7 +74,8 @@ function shuffleBtnFunc() {
         document.querySelector('input[name="decayFormula"]:checked').value;
     const weightFunc = (checkedMethod === "linear") ? (
         (index, length) => length - decayRate * Math.min(
-            index, Math.floor(length / decayRate)
+            index,
+            Math.floor(length / decayRate)
         )
     ) : (
         (index, length) => Math.E ** (-2 * Math.PI * decayRate * index / length)
@@ -88,7 +91,14 @@ function shuffleBtnFunc() {
             alert('The playlist is empty.');
             return;
         }
-        // console.log(playlist);
+        // remove <unknown> artists
+        for (let i = 0; i < playlist.length; i++) {
+            playlist[i].artist = playlist[i].artist
+                .trim()
+                .replace('<unknown> - ', '')
+                .replace('<unknown>', '')
+        }
+        console.log(playlist);
         const weights = []
         for (let i = 0; i < playlist.length; i++) {
             weights.push(weightFunc(i, playlist.length));
