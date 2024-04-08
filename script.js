@@ -1,6 +1,17 @@
 document.getElementById('shuffleBtn')
     .addEventListener('click', shuffleBtnFunc);
 
+function getFormatDate() {
+    let d = new Date();
+    let options = {
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+    };
+    return d.toLocaleTimeString("zh", options)
+        .replaceAll('/', '-')
+        .replaceAll(':', '-')
+        .replace(' ', '-');
+}
 
 function displayPlaylist(playlist, listid) {
     const fileInput = document.getElementById('fileInput');
@@ -114,9 +125,9 @@ function shuffleBtnFunc() {
         const lines = ['#EXTM3U']
         for (let i = 0; i < shuffledList.length; i++) {
             lines.push(
-                `#EXTINF:${shuffledList[i].length},${shuffledList[i].artist}`
-                + `- ${shuffledList[i].title}\n`
-                + shuffledList[i].file
+                // `#EXTINF:${shuffledList[i].length},${shuffledList[i].artist}`
+                // + `- ${shuffledList[i].title}\n` +
+                shuffledList[i].file
             )
         }
         const shuffledM3U = lines.join('\n');

@@ -47,7 +47,8 @@
     </div>
 
     <button id="shuffleBtn">Shuffle list</button>
-    <a id="downloadLink" download="shuffled_list.m3u">
+    <a id="downloadLink" download="shuffled_CURRENT-TIME.m3u"
+        onclick="this.download=`shuffled_${getFormatDate()}.m3u`">
         <button id="downloadBtn">Download</button>
     </a>
 
